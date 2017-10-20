@@ -13,6 +13,8 @@
 		CCEAC20B1F99F77A00DFA151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEAC2091F99F77A00DFA151 /* LaunchScreen.storyboard */; };
 		CCEAC2161F9A064100DFA151 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAC2151F9A064100DFA151 /* ListingViewController.swift */; };
 		CCEAC2181F9A06D100DFA151 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAC2171F9A06D100DFA151 /* FavoritesViewController.swift */; };
+		CCEAC21A1F9A145800DFA151 /* ListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAC2191F9A145800DFA151 /* ListingViewModel.swift */; };
+		CCEAC21D1F9A255C00DFA151 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAC21C1F9A255C00DFA151 /* Collection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		CCEAC20C1F99F77A00DFA151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCEAC2151F9A064100DFA151 /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		CCEAC2171F9A06D100DFA151 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		CCEAC2191F9A145800DFA151 /* ListingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewModel.swift; sourceTree = "<group>"; };
+		CCEAC21C1F9A255C00DFA151 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		CCEAC1FF1F99F77A00DFA151 /* MyRedditRader */ = {
 			isa = PBXGroup;
 			children = (
+				CCEAC21B1F9A253F00DFA151 /* Helers */,
 				CCEAC2141F9A05E300DFA151 /* ViewControllers */,
 				CCEAC2001F99F77A00DFA151 /* AppDelegate.swift */,
 				CCEAC2041F99F77A00DFA151 /* Main.storyboard */,
@@ -70,9 +75,18 @@
 			isa = PBXGroup;
 			children = (
 				CCEAC2151F9A064100DFA151 /* ListingViewController.swift */,
+				CCEAC2191F9A145800DFA151 /* ListingViewModel.swift */,
 				CCEAC2171F9A06D100DFA151 /* FavoritesViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CCEAC21B1F9A253F00DFA151 /* Helers */ = {
+			isa = PBXGroup;
+			children = (
+				CCEAC21C1F9A255C00DFA151 /* Collection.swift */,
+			);
+			path = Helers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,8 +162,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCEAC2011F99F77A00DFA151 /* AppDelegate.swift in Sources */,
+				CCEAC21D1F9A255C00DFA151 /* Collection.swift in Sources */,
 				CCEAC2181F9A06D100DFA151 /* FavoritesViewController.swift in Sources */,
 				CCEAC2161F9A064100DFA151 /* ListingViewController.swift in Sources */,
+				CCEAC21A1F9A145800DFA151 /* ListingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
