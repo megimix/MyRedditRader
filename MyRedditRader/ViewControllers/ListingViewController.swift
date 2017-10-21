@@ -12,7 +12,7 @@ class ListingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     lazy var viewModel: ListingViewModel = {
-        return ListingViewModel(didUpdate: { [unowned self] (animated) in
+        return ListingViewModel(channelName: "bitcoin", didUpdate: { [unowned self] (animated) in
 //            self.reloadData(animated: animated)
                 self.tableView.reloadData()
             }
@@ -25,7 +25,6 @@ class ListingViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .green
-        
     }
 }
 

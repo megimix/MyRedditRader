@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC4AED821F9B60CD00446D84 /* RedditListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4AED811F9B60CD00446D84 /* RedditListingModel.swift */; };
 		CCEAC2011F99F77A00DFA151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAC2001F99F77A00DFA151 /* AppDelegate.swift */; };
 		CCEAC2061F99F77A00DFA151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEAC2041F99F77A00DFA151 /* Main.storyboard */; };
 		CCEAC2081F99F77A00DFA151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCEAC2071F99F77A00DFA151 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC4AED811F9B60CD00446D84 /* RedditListingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditListingModel.swift; sourceTree = "<group>"; };
 		CCEAC1FD1F99F77A00DFA151 /* MyRedditRader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRedditRader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEAC2001F99F77A00DFA151 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCEAC2051F99F77A00DFA151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			children = (
 				CCEAC2151F9A064100DFA151 /* ListingViewController.swift */,
 				CCEAC2191F9A145800DFA151 /* ListingViewModel.swift */,
+				CC4AED811F9B60CD00446D84 /* RedditListingModel.swift */,
 				CCEAC2171F9A06D100DFA151 /* FavoritesViewController.swift */,
 			);
 			path = ViewControllers;
@@ -167,6 +170,7 @@
 				CCEAC2011F99F77A00DFA151 /* AppDelegate.swift in Sources */,
 				CCEAC21D1F9A255C00DFA151 /* Collection.swift in Sources */,
 				CCEAC2181F9A06D100DFA151 /* FavoritesViewController.swift in Sources */,
+				CC4AED821F9B60CD00446D84 /* RedditListingModel.swift in Sources */,
 				CCEAC2161F9A064100DFA151 /* ListingViewController.swift in Sources */,
 				CCEAC21F1F9A303200DFA151 /* API.swift in Sources */,
 				CCEAC21A1F9A145800DFA151 /* ListingViewModel.swift in Sources */,
