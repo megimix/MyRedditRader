@@ -29,7 +29,7 @@ class RedditListingModel {
     }
     
     func path() -> String {
-        let path = self.baseUrl + self.channelName + "/" + self.filterMethod.urlString() + "?limit=" + self.limit
+        let path = self.baseUrl + self.channelName + "/" + self.filterMethod.urlString() + "?count=" + self.limit
         var urlParams = ""
         if let item = self.items.last {
             urlParams = "&after=" + item.id
@@ -59,7 +59,7 @@ class ListingModel {
     
     init?(with json: DictionaryStringAnyObject) {
         guard let data = json["data"] as? DictionaryStringAnyObject,
-            let id = data["id"] as? String else {
+            let id = data["name"] as? String else {
                 return nil
         }
         

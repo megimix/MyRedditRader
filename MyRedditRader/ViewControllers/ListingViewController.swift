@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ListingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
@@ -25,6 +26,10 @@ class ListingViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .green
+        
+        self.tableView.addInfiniteScroll { (tableView) in
+            self.viewModel.loadNextPage(with: tableView)
+        }
     }
 }
 
@@ -40,6 +45,12 @@ extension ListingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return self.viewModel.getCell(with: tableView, At: indexPath)
     }
+}
+
+
+class ReditListingCell: UITableViewCell{
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
 }
 
 

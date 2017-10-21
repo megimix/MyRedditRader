@@ -40,7 +40,7 @@ class API {
         session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
             if let data = data {
                 let responseData = String(data: data, encoding: String.Encoding.utf8)
-                print(responseData!)
+                print("request: " + (request.url?.absoluteString ?? "") + "\n" + responseData!)
                 
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 if let json = json as DictionaryStringAnyObject? {

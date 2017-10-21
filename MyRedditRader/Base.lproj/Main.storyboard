@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gSG-eV-4Pk" userLabel="tableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gSG-eV-4Pk" userLabel="tableView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -48,7 +48,37 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4TB-hl-OtQ" id="OD8-X7-XRk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xkJ-52-iEq" userLabel="thumbnailImageView">
+                                                    <rect key="frame" x="5" y="-3.5" width="70" height="50.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="TtG-lt-izZ"/>
+                                                        <constraint firstAttribute="height" constant="50" id="qfk-Bd-NZh"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLQ-pM-54c" userLabel="titleLabel">
+                                                    <rect key="frame" x="85" y="5" width="285" height="33.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xkJ-52-iEq" firstAttribute="centerY" secondItem="OD8-X7-XRk" secondAttribute="centerY" id="22Q-S2-bc7"/>
+                                                <constraint firstItem="DLQ-pM-54c" firstAttribute="leading" secondItem="xkJ-52-iEq" secondAttribute="trailing" constant="10" id="Juk-jd-L7p"/>
+                                                <constraint firstItem="xkJ-52-iEq" firstAttribute="leading" secondItem="OD8-X7-XRk" secondAttribute="leading" constant="5" id="NLT-pZ-VJK"/>
+                                                <constraint firstItem="DLQ-pM-54c" firstAttribute="centerY" secondItem="OD8-X7-XRk" secondAttribute="centerY" id="Yk2-0t-bvY"/>
+                                                <constraint firstAttribute="bottom" secondItem="DLQ-pM-54c" secondAttribute="bottom" constant="5" id="gLC-Lf-J3T"/>
+                                                <constraint firstAttribute="bottom" secondItem="xkJ-52-iEq" secondAttribute="bottom" priority="750" constant="5" id="hTK-OY-22o"/>
+                                                <constraint firstItem="xkJ-52-iEq" firstAttribute="top" secondItem="OD8-X7-XRk" secondAttribute="top" priority="750" constant="5" id="jNv-vm-dwJ"/>
+                                                <constraint firstItem="DLQ-pM-54c" firstAttribute="top" secondItem="OD8-X7-XRk" secondAttribute="top" constant="5" id="ll1-1a-W9l"/>
+                                                <constraint firstAttribute="trailing" secondItem="DLQ-pM-54c" secondAttribute="trailing" constant="5" id="pjH-hR-y9k"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="thumbnailImageView" destination="xkJ-52-iEq" id="65d-gB-jIF"/>
+                                            <outlet property="titleLabel" destination="DLQ-pM-54c" id="4Nd-yS-86a"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

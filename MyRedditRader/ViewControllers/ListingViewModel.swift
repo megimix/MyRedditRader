@@ -7,25 +7,25 @@
 //
 
 import UIKit
+import SDWebImage
 
 typealias UpdateHandler = (_ animated: Bool) -> ()
-
-class ReditListingCell: UITableViewCell{
-    
-}
 
 class ListingViewModel {
     enum PageMode {
         case normal
 //        case waitingForLogin
         case loading
+        case loadingNext
     }
     
     let redditListing: RedditListingModel
     
     var mode: PageMode = .loading {
         didSet {
-            self.didUpdate?(true)
+            if self.mode != .loadingNext {
+                self.didUpdate?(true)
+            }
         }
     }
     
@@ -47,6 +47,14 @@ class ListingViewModel {
         }
     }
     
+    func loadNextPage(with tableView: UITableView) {
+        self.mode = .loadingNext
+        self.redditListing.get { (result) in
+            self.mode = .normal
+            tableView.finishInfiniteScroll()
+        }
+    }
+    
     func getCellIdentifier(for indexPath: IndexPath) -> String {
         return (String(describing: ReditListingCell.self))
     }
@@ -54,8 +62,8 @@ class ListingViewModel {
     func getCell(with tableView: UITableView, At indexPath: IndexPath) -> UITableViewCell {
         if let item = self.redditListing.items[safe: indexPath.row],
             let cell = tableView.dequeueReusableCell(withIdentifier: self.getCellIdentifier(for: indexPath), for: indexPath) as? ReditListingCell {
-            cell.textLabel?.text = item.id
-            
+                cell.titleLabel.text = item.title ?? ""
+                cell.thumbnailImageView.sd_setImage(with: URL(string: item.thumbnailUrl!), placeholderImage: UIImage(named: "placeholder.png"))
             return cell
         }
         
