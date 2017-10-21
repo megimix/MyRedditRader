@@ -41,6 +41,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gSG-eV-4Pk" userLabel="tableView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="u3q-45-e9s">
+                                    <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReditListingCell" id="4TB-hl-OtQ" customClass="ReditListingCell" customModule="MyRedditRader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -108,7 +113,7 @@
         <!--Listing Details Web View Controller-->
         <scene sceneID="wIc-Vi-HKg">
             <objects>
-                <viewController id="oDu-sd-LFU" customClass="ListingDetailsWebViewController" customModule="MyRedditRader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="oDu-sd-LFU" customClass="ListingDetailsWebViewController" customModule="MyRedditRader" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bow-nW-qPk"/>
                         <viewControllerLayoutGuide type="bottom" id="px7-lk-3Ji"/>
@@ -118,20 +123,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5SH-EY-Sgl">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5oT-1C-ynU">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.054901960780000002" green="0.054901960780000002" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="px7-lk-3Ji" firstAttribute="top" secondItem="5SH-EY-Sgl" secondAttribute="bottom" id="9Vr-g5-BQ5"/>
                             <constraint firstAttribute="trailing" secondItem="5SH-EY-Sgl" secondAttribute="trailing" id="AS2-5B-bNY"/>
+                            <constraint firstItem="5oT-1C-ynU" firstAttribute="centerX" secondItem="u80-Zk-T5F" secondAttribute="centerX" id="D94-1K-Gwj"/>
                             <constraint firstItem="5SH-EY-Sgl" firstAttribute="leading" secondItem="u80-Zk-T5F" secondAttribute="leading" id="c0L-kR-emP"/>
                             <constraint firstItem="5SH-EY-Sgl" firstAttribute="top" secondItem="Bow-nW-qPk" secondAttribute="bottom" id="pGa-1N-e7l"/>
+                            <constraint firstItem="5oT-1C-ynU" firstAttribute="centerY" secondItem="u80-Zk-T5F" secondAttribute="centerY" id="v5r-kB-kew"/>
                         </constraints>
                     </view>
                     <connections>
@@ -142,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="2686" y="-2261"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="gYe-a0-STr">
             <objects>
-                <tabBarController id="u1I-0s-N8j" sceneMemberID="viewController">
+                <tabBarController id="u1I-0s-N8j" customClass="MainTabBarController" customModule="MyRedditRader" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XYj-ms-DGQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -170,7 +181,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="jnN-T6-fNX" kind="relationship" relationship="rootViewController" id="V2A-sd-10c"/>
+                        <segue destination="9bh-Ge-GhP" kind="relationship" relationship="rootViewController" id="i5V-82-tyg"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ho2-by-PFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -199,4 +210,7 @@
             <point key="canvasLocation" x="1641" y="-1549"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="i5V-82-tyg"/>
+    </inferredMetricsTieBreakers>
 </document>

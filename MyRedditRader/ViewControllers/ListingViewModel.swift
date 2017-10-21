@@ -14,12 +14,9 @@ typealias UpdateHandler = (_ animated: Bool) -> ()
 class ListingViewModel {
     enum PageMode {
         case normal
-//        case waitingForLogin
         case loading
         case loadingNext
     }
-    
-    let redditListing: RedditListingModel
     
     var mode: PageMode = .loading {
         didSet {
@@ -29,27 +26,41 @@ class ListingViewModel {
         }
     }
     
-    let numberOfSections = 1
-    var numberOfItemsInSection: Int {
-        return self.redditListing.items.count
-    }
-    
+    let onlyFavorite: Bool
     var didError: UpdateHandler?
     var didUpdate: UpdateHandler?
     
-    init(channelName: String, didUpdate: @escaping UpdateHandler, didError: @escaping UpdateHandler) {
+    let numberOfSections = 1
+    var numberOfItemsInSection: Int {
+        return self.items().count
+    }
+    
+    
+    init(onlyFavorite: Bool, didUpdate: @escaping UpdateHandler, didError: @escaping UpdateHandler) {
+        self.onlyFavorite = onlyFavorite
         self.didError = didError
         self.didUpdate = didUpdate
         
-        self.redditListing = RedditListingModel(channel: channelName, filterMethod: .top)
-        self.redditListing.get { (result) in
+        ListingManager.sharedInstance.get { [unowned self] (result) in
             self.mode = .normal
+        }
+    }
+    
+    func items() -> [ListingModel] {
+        let redditListing = ListingManager.sharedInstance.redditListing
+        if self.onlyFavorite {
+            return redditListing.items.filter({ (listModel) -> Bool in
+                return listModel.isFavorite
+            })
+        }
+        else {
+            return redditListing.items
         }
     }
     
     func loadNextPage(with tableView: UITableView) {
         self.mode = .loadingNext
-        self.redditListing.get { (result) in
+        ListingManager.sharedInstance.get { [unowned self] (result) in
             self.mode = .normal
             tableView.finishInfiniteScroll()
         }
@@ -60,7 +71,7 @@ class ListingViewModel {
     }
     
     func getCell(with tableView: UITableView, At indexPath: IndexPath) -> UITableViewCell {
-        if let item = self.redditListing.items[safe: indexPath.row],
+        if let item = self.items()[safe: indexPath.row],
             let cell = tableView.dequeueReusableCell(withIdentifier: self.getCellIdentifier(for: indexPath), for: indexPath) as? ReditListingCell {
                 cell.titleLabel.text = item.title ?? ""
                 cell.thumbnailImageView.sd_setImage(with: URL(string: item.thumbnailUrl!), placeholderImage: UIImage(named: "placeholder.png"))

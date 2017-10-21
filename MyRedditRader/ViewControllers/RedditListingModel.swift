@@ -8,57 +8,24 @@
 
 import Foundation
 
-class RedditListingModel {
-    enum FilterMethods: String {
-        case top
-        case new
-        
-        func urlString() -> String {
-            return self.rawValue + ".json"
-        }
+enum FilterMethods: String {
+    case top
+    case new
+    
+    func urlSafix() -> String {
+        return self.rawValue + ".json"
     }
+}
+
+class RedditListingModel {
     var items: [ListingModel] = [ListingModel]()
+    
     let channelName: String
     let filterMethod: FilterMethods
-    let baseUrl = "https://www.reddit.com/"
-    let limit = "15"
     
     init(channel name: String, filterMethod: FilterMethods) {
         self.channelName = name
         self.filterMethod = filterMethod
-    }
-    
-    func path() -> String {
-        let path = self.baseUrl + "r/" + self.channelName + "/" + self.filterMethod.urlString() + "?count=" + self.limit
-        var urlParams = ""
-        if let item = self.items.last {
-            urlParams = "&after=" + item.id
-        }
-        return path + urlParams
-    }
-    
-    func get(completion: @escaping(Result<RedditListingModel>) -> Void) {
-        API.request(with: nil, to: self.path(), methodType: .GET) { (result) in
-            switch result {
-            case .success(let resultJson):
-                if let arrayOfListModel = ListingModel.parseArrayOfListModel(with: resultJson) {
-                    self.items += arrayOfListModel
-                    completion(Result.success(self))
-                }
-            case .error(let error):
-                completion(Result.error(e: error))
-            }
-        }
-    }
-    
-    func urlForItem(at indexPath: IndexPath) -> String? {
-        if let item = self.items[safe: indexPath.row],
-            let permalink = item.permalink {
-            return self.baseUrl + permalink
-        }
-        else {
-            return nil
-        }
     }
 }
 
@@ -67,6 +34,7 @@ class ListingModel {
     let title: String?
     let thumbnailUrl: String?
     let permalink: String?
+    var isFavorite: Bool
     
     init?(with json: DictionaryStringAnyObject) {
         guard let data = json["data"] as? DictionaryStringAnyObject,
@@ -78,6 +46,7 @@ class ListingModel {
         self.title = data["title"] as? String
         self.thumbnailUrl = data["thumbnail"] as? String
         self.permalink = data["permalink"] as? String
+        self.isFavorite = false
     }
     
     static func parseArrayOfListModel(with json: DictionaryStringAnyObject) -> [ListingModel]? {
