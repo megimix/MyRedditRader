@@ -20,7 +20,7 @@ class RedditListingModel {
     var items: [ListingModel] = [ListingModel]()
     let channelName: String
     let filterMethod: FilterMethods
-    let baseUrl = "https://www.reddit.com/r/"
+    let baseUrl = "https://www.reddit.com/"
     let limit = "15"
     
     init(channel name: String, filterMethod: FilterMethods) {
@@ -29,7 +29,7 @@ class RedditListingModel {
     }
     
     func path() -> String {
-        let path = self.baseUrl + self.channelName + "/" + self.filterMethod.urlString() + "?count=" + self.limit
+        let path = self.baseUrl + "r/" + self.channelName + "/" + self.filterMethod.urlString() + "?count=" + self.limit
         var urlParams = ""
         if let item = self.items.last {
             urlParams = "&after=" + item.id
@@ -50,12 +50,23 @@ class RedditListingModel {
             }
         }
     }
+    
+    func urlForItem(at indexPath: IndexPath) -> String? {
+        if let item = self.items[safe: indexPath.row],
+            let permalink = item.permalink {
+            return self.baseUrl + permalink
+        }
+        else {
+            return nil
+        }
+    }
 }
 
 class ListingModel {
     let id: String
     let title: String?
     let thumbnailUrl: String?
+    let permalink: String?
     
     init?(with json: DictionaryStringAnyObject) {
         guard let data = json["data"] as? DictionaryStringAnyObject,
@@ -66,6 +77,7 @@ class ListingModel {
         self.id = id
         self.title = data["title"] as? String
         self.thumbnailUrl = data["thumbnail"] as? String
+        self.permalink = data["permalink"] as? String
     }
     
     static func parseArrayOfListModel(with json: DictionaryStringAnyObject) -> [ListingModel]? {

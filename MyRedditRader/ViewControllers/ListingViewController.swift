@@ -31,6 +31,14 @@ class ListingViewController: UIViewController {
             self.viewModel.loadNextPage(with: tableView)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let listingDitalesViewController = segue.destination as? ListingDetailsWebViewController,
+            let indexPath = self.tableView.indexPathForSelectedRow,
+            let url = self.viewModel.redditListing.urlForItem(at: indexPath){
+            listingDitalesViewController.url = url;
+        }
+    }
 }
 
 extension ListingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -45,6 +53,11 @@ extension ListingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return self.viewModel.getCell(with: tableView, At: indexPath)
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//
+//    }
 }
 
 

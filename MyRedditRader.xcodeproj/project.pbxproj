@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6DDF913B9AA30D2927308B3A /* Pods_MyRedditRader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB34CFB54917BC7B3C433176 /* Pods_MyRedditRader.framework */; };
+		CC127F461F9B8D54000ED103 /* ListingDetailsWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC127F451F9B8D54000ED103 /* ListingDetailsWebViewController.swift */; };
 		CC4AED821F9B60CD00446D84 /* RedditListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4AED811F9B60CD00446D84 /* RedditListingModel.swift */; };
 		CCEAC2011F99F77A00DFA151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAC2001F99F77A00DFA151 /* AppDelegate.swift */; };
 		CCEAC2061F99F77A00DFA151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEAC2041F99F77A00DFA151 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		AB34CFB54917BC7B3C433176 /* Pods_MyRedditRader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyRedditRader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC127F401F9B6F18000ED103 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CC127F411F9B77A0000ED103 /* MyRedditRader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyRedditRader-Bridging-Header.h"; sourceTree = "<group>"; };
+		CC127F451F9B8D54000ED103 /* ListingDetailsWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailsWebViewController.swift; sourceTree = "<group>"; };
 		CC4AED811F9B60CD00446D84 /* RedditListingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditListingModel.swift; sourceTree = "<group>"; };
 		CCEAC1FD1F99F77A00DFA151 /* MyRedditRader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRedditRader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEAC2001F99F77A00DFA151 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				CC4AED811F9B60CD00446D84 /* RedditListingModel.swift */,
 				CCEAC2171F9A06D100DFA151 /* FavoritesViewController.swift */,
 				CC127F411F9B77A0000ED103 /* MyRedditRader-Bridging-Header.h */,
+				CC127F451F9B8D54000ED103 /* ListingDetailsWebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				CCEAC2181F9A06D100DFA151 /* FavoritesViewController.swift in Sources */,
 				CC4AED821F9B60CD00446D84 /* RedditListingModel.swift in Sources */,
 				CCEAC2161F9A064100DFA151 /* ListingViewController.swift in Sources */,
+				CC127F461F9B8D54000ED103 /* ListingDetailsWebViewController.swift in Sources */,
 				CCEAC21F1F9A303200DFA151 /* API.swift in Sources */,
 				CCEAC21A1F9A145800DFA151 /* ListingViewModel.swift in Sources */,
 			);

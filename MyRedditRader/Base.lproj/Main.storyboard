@@ -78,6 +78,7 @@
                                         <connections>
                                             <outlet property="thumbnailImageView" destination="xkJ-52-iEq" id="65d-gB-jIF"/>
                                             <outlet property="titleLabel" destination="DLQ-pM-54c" id="4Nd-yS-86a"/>
+                                            <segue destination="oDu-sd-LFU" kind="show" id="Wqb-9C-0Sa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -103,6 +104,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G2Y-eA-7hN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1641" y="-2270"/>
+        </scene>
+        <!--Listing Details Web View Controller-->
+        <scene sceneID="wIc-Vi-HKg">
+            <objects>
+                <viewController id="oDu-sd-LFU" customClass="ListingDetailsWebViewController" customModule="MyRedditRader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bow-nW-qPk"/>
+                        <viewControllerLayoutGuide type="bottom" id="px7-lk-3Ji"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u80-Zk-T5F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5SH-EY-Sgl">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="px7-lk-3Ji" firstAttribute="top" secondItem="5SH-EY-Sgl" secondAttribute="bottom" id="9Vr-g5-BQ5"/>
+                            <constraint firstAttribute="trailing" secondItem="5SH-EY-Sgl" secondAttribute="trailing" id="AS2-5B-bNY"/>
+                            <constraint firstItem="5SH-EY-Sgl" firstAttribute="leading" secondItem="u80-Zk-T5F" secondAttribute="leading" id="c0L-kR-emP"/>
+                            <constraint firstItem="5SH-EY-Sgl" firstAttribute="top" secondItem="Bow-nW-qPk" secondAttribute="bottom" id="pGa-1N-e7l"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="5SH-EY-Sgl" id="Vfs-a8-WFl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gwW-rV-gXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2686" y="-2261"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gYe-a0-STr">
