@@ -11,7 +11,7 @@ import UIKit
 class ListingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    lazy var viewModel: ListingViewModel = {
+    private lazy var viewModel: ListingViewModel = {
         return ListingViewModel(onlyFavorite: self.onlyFavorite, didUpdate: { [unowned self] (animated) in
                 self.reload()
             }
@@ -20,20 +20,18 @@ class ListingViewController: UIViewController {
         })
     }()
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     var onlyFavorite: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.onlyFavorite == false {
-            self.tableView.addInfiniteScroll { (tableView) in
-                self.viewModel.loadNextPage(with: tableView)
-            }
-            self.title = ListingManager.sharedInstance.channelName
-        }
-        else {
-            self.title = "Favorites"
-        }
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = self.onlyFavorite ? "Favorites" : ListingManager.sharedInstance.channelName
+        
+        self.setupSearchController()
+        self.setupInfiniteScroll()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,10 +41,6 @@ class ListingViewController: UIViewController {
         }
     }
     
-    func reload() {
-        self.tableView.reloadData()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let listingDitalesViewController = segue.destination as? ListingDetailsWebViewController,
             let indexPath = self.tableView.indexPathForSelectedRow,
@@ -54,6 +48,37 @@ class ListingViewController: UIViewController {
             listingDitalesViewController.listingModel = item
             listingDitalesViewController.showRemoveFromFavorite = self.onlyFavorite
         }
+        
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
+    private func reload() {
+        self.tableView.reloadData()
+    }
+    
+    private func setupInfiniteScroll() {
+        self.tableView.addInfiniteScroll { (tableView) in
+            self.viewModel.loadNextPage(with: tableView)
+        }
+        
+        self.tableView.setShouldShowInfiniteScrollHandler { (tableView) -> Bool in
+            if self.onlyFavorite == true {
+                return false
+            }
+            else {
+                return (self.viewModel.mode != .searching)
+            }
+        }
+    }
+    
+    private func setupSearchController() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search " + (self.title ?? "")
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
     }
 }
 
@@ -71,9 +96,13 @@ extension ListingViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension ListingViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        self.viewModel.searchText = searchController.searchBar.text ?? ""
+    }
+}
+
 class ReditListingCell: UITableViewCell{
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
 }
-
-

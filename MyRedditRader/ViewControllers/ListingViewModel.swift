@@ -16,6 +16,7 @@ class ListingViewModel {
         case normal
         case loading
         case loadingNext
+        case searching
     }
     
     var mode: PageMode = .loading {
@@ -26,7 +27,19 @@ class ListingViewModel {
         }
     }
     
+    let minSearchChars = 3
+    
     let onlyFavorite: Bool
+    var searchText: String? {
+        didSet {
+            if self.searchText?.count ?? 0 >= self.minSearchChars {
+                self.mode = .searching
+            }
+            else {
+                self.mode = .normal
+            }
+        }
+    }
     var didError: UpdateHandler?
     var didUpdate: UpdateHandler?
     
@@ -48,14 +61,25 @@ class ListingViewModel {
     
     func items() -> [ListingModel] {
         let redditListing = ListingManager.sharedInstance.redditListing
+        var items2Returm: [ListingModel]
         if self.onlyFavorite {
-            return redditListing.items.filter({ (listModel) -> Bool in
+            items2Returm = redditListing.items.filter({ (listModel) -> Bool in
                 return listModel.isFavorite
             })
         }
         else {
-            return redditListing.items
+            items2Returm = redditListing.items
         }
+        
+        if let searchText = self.searchText,
+            searchText.count >= self.minSearchChars,
+            self.mode == .searching {
+            items2Returm = items2Returm.filter({ (listModel) -> Bool in
+                return (listModel.title?.lowercased().contains(searchText.lowercased()) ?? false)
+            })
+        }
+        
+        return items2Returm
     }
     
     func loadNextPage(with tableView: UITableView) {
@@ -74,7 +98,7 @@ class ListingViewModel {
         if let item = self.items()[safe: indexPath.row],
             let cell = tableView.dequeueReusableCell(withIdentifier: self.getCellIdentifier(for: indexPath), for: indexPath) as? ReditListingCell {
                 cell.titleLabel.text = item.title ?? ""
-                cell.thumbnailImageView.sd_setImage(with: URL(string: item.thumbnailUrl!), placeholderImage: UIImage(named: "placeholder.png"))
+                cell.thumbnailImageView.sd_setImage(with: URL(string: item.thumbnailUrl!), placeholderImage: UIImage(named: "reddit_logo"))
             return cell
         }
         

@@ -11,12 +11,18 @@ import WebKit
 
 class ListingDetailsWebViewController: UIViewController {
     
-    @IBOutlet private weak var webView: WKWebView!
+    @IBOutlet private weak var webView: WKWebView! {
+        didSet {
+            self.webView.navigationDelegate = self
+        }
+    }
+    
     @IBOutlet var loadSpinner: UIActivityIndicatorView!
     var listingModel: ListingModel?
     var showRemoveFromFavorite: Bool = false
     
     override func viewDidLoad() {
+        self.navigationController?.navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
         if let listingUrl = self.listingModel?.permalink,
             let url = URL(string: ListingManager.sharedInstance.baseUrl + listingUrl) {
@@ -40,12 +46,19 @@ class ListingDetailsWebViewController: UIViewController {
             self.updateRightBarButtonItem(showRemoveFromFavorite: listingModel.isFavorite)
         }
     }
+}
+
+
+extension ListingDetailsWebViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.loadSpinner.stopAnimating()
+    }
     
-    func webViewDidStartLoad(_ : UIWebView) {
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.loadSpinner.startAnimating()
     }
     
-    func webViewDidFinishLoad(_ : UIWebView) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.loadSpinner.stopAnimating()
     }
 }
