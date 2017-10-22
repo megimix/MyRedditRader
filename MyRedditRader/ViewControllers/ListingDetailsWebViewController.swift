@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 class ListingDetailsWebViewController: UIViewController {
-    
+    let htmlErrorMassge = "<br/><h2>somthing went wronge</h2>"
     @IBOutlet private weak var webView: WKWebView! {
         didSet {
             self.webView.navigationDelegate = self
@@ -29,7 +29,7 @@ class ListingDetailsWebViewController: UIViewController {
             self.webView.load(URLRequest(url: url))
         }
         else {
-            //present somting went wrong.
+            self.webView.loadHTMLString(self.htmlErrorMassge, baseURL: nil)
         }
         
         self.updateRightBarButtonItem(showRemoveFromFavorite: self.showRemoveFromFavorite)

@@ -22,7 +22,16 @@ class ListingViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    var onlyFavorite: Bool = true
+    lazy var onlyFavorite: Bool = {
+        if let tabBarController = self.tabBarController,
+            let viewControllers = tabBarController.viewControllers,
+            let firstViewController = viewControllers.first as? UINavigationController,
+            let firstViewControllerRootViewController = firstViewController.topViewController,
+            firstViewControllerRootViewController == self {
+            return false
+        }
+        return true
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()

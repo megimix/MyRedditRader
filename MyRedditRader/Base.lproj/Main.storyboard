@@ -155,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="2686" y="-2261"/>
         </scene>
-        <!--Main Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="gYe-a0-STr">
             <objects>
-                <tabBarController id="u1I-0s-N8j" customClass="MainTabBarController" customModule="MyRedditRader" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="u1I-0s-N8j" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XYj-ms-DGQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
